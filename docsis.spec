@@ -2,12 +2,13 @@ Summary:	DOCSIS RFI 1.1 Encoding Configuration File Settings into binary configu
 Summary(pl.UTF-8):	Kodowanie ustawień konfiguracyjnych w plikach binarnych wg DOCSIS RFI 1.1
 Name:		docsis
 Version:	0.9.5
-Release:	0.1
+Release:	1.1
 License:	GPL v2
 Group:		Applications
 Source0:	http://dl.sourceforge.net/docsis/%{name}-%{version}.tar.gz
 # Source0-md5:	2b89cf254a5eb07b0ee8b6331238ea96
 Patch0:		%{name}-gnu-m4-detect.patch
+Patch1:		%{name}-link.patch
 URL:		http://docsis.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -27,8 +28,10 @@ konfiguracyjnych zgodnie z DOCSIS RFI 1.1.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
