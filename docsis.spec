@@ -2,7 +2,7 @@ Summary:	DOCSIS RFI 1.1 Encoding Configuration File Settings into binary configu
 Summary(pl.UTF-8):	Kodowanie ustawień konfiguracyjnych w plikach binarnych wg DOCSIS RFI 1.1
 Name:		docsis
 Version:	0.9.5
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Applications
 Source0:	http://dl.sourceforge.net/docsis/%{name}-%{version}.tar.gz
@@ -12,10 +12,10 @@ Patch1:		%{name}-link.patch
 URL:		http://docsis.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libtool	
 BuildRequires:	flex
+BuildRequires:	libtool
 BuildRequires:	net-snmp-devel
-Requires:	net-snmp-mibs
+Requires:	mibs-%{name}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -25,6 +25,15 @@ as specified by the DOCSIS RFI 1.1.
 %description -l pl.UTF-8
 Kodowanie ustawień konfiguracyjnych w binarnych plikach
 konfiguracyjnych zgodnie z DOCSIS RFI 1.1.
+
+%package -n mibs-%{name}
+Summary:	MIBs from DOCSIS
+Group:		Base
+Requires:	mibs-dirs
+Requires:	mibs-net-snmp
+
+%description -n mibs-%{name}
+MIBs (Management Information Base) from DOCSIS.
 
 %prep
 %setup -q
@@ -44,7 +53,8 @@ konfiguracyjnych zgodnie z DOCSIS RFI 1.1.
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	mibsdir=%{_datadir}/mibs
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -52,6 +62,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/docsis
 %{_datadir}/%{name}
-%{_datadir}/snmp/mibs/*
+
+%files -n mibs-%{name}
+%defattr(644,root,root,755)
+%{_datadir}/mibs/*
