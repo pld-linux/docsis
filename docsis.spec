@@ -12,6 +12,7 @@ Patch1:		%{name}-link.patch
 URL:		http://docsis.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	libtool
 BuildRequires:	net-snmp-devel
