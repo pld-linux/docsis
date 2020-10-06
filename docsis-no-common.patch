@@ -1,0 +1,27 @@
+--- docsis-0.9.6/src/docsis_globals.h.orig	2010-05-27 00:00:09.000000000 +0200
++++ docsis-0.9.6/src/docsis_globals.h	2020-10-06 17:08:17.658810480 +0200
+@@ -23,8 +23,8 @@
+ #ifndef _DOCSIS_GLOBALS_H
+ #define _DOCSIS_GLOBALS_H
+ 
+-char prog_name[255];
+-struct tlv *global_tlvtree_head;
+-symbol_type *global_symtable;
++extern char prog_name[255];
++extern struct tlv *global_tlvtree_head;
++extern symbol_type *global_symtable;
+ 
+ #endif /* _DOCSIS_GLOBALS_H */
+--- docsis-0.9.6/src/docsis.c.orig	2010-06-11 18:32:30.000000000 +0200
++++ docsis-0.9.6/src/docsis.c	2020-10-06 17:10:41.491364606 +0200
+@@ -44,6 +44,10 @@
+ 
+ extern unsigned int line;	/* defined in docsis_lex.l */
+ 
++char prog_name[255];
++struct tlv *global_tlvtree_head;
++symbol_type *global_symtable;
++
+ static void setup_mib_flags(void);
+ 
+ static unsigned int

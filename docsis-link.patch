@@ -1,15 +1,11 @@
-diff -u b.docsis-0.9.5/configure.in n.docsis-0.9.5/configure.in
---- b.docsis-0.9.5/configure.in	2005-07-06 01:53:18.000000000 +0200
-+++ n.docsis-0.9.5/configure.in	2008-09-25 15:54:05.804556120 +0200
-@@ -10,6 +10,7 @@
+--- docsis-0.9.6/configure.in.orig	2020-10-06 17:01:31.477677619 +0200
++++ docsis-0.9.6/configure.in	2020-10-06 17:03:55.176899134 +0200
+@@ -8,7 +8,7 @@
+ dnl AC_PROG_YACC
  AC_PROG_LEX
  
- AC_CHECK_LIB(resolv, inet_aton)
-+AC_CHECK_LIB(m, trunc)
+-AC_CHECK_LIB(resolv, inet_aton)
++AC_SEARCH_LIBS(inet_aton, resolv)
+ AC_CHECK_LIBM
+ AC_SUBST(LIBM)
  
- AC_PATH_PROGS([M4], [gm4 gnum4 m4], [notfound],[/usr/local/bin:/usr/freeware/bin:/usr/gnu/bin:${prefix}/bin:${exec_prefix}/bin:$PATH] )
- if test "x$M4" = "xnotfound"; then
-Common subdirectories: b.docsis-0.9.5/doc and n.docsis-0.9.5/doc
-Common subdirectories: b.docsis-0.9.5/examples and n.docsis-0.9.5/examples
-Common subdirectories: b.docsis-0.9.5/mibs and n.docsis-0.9.5/mibs
-Common subdirectories: b.docsis-0.9.5/src and n.docsis-0.9.5/src

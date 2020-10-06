@@ -1,22 +1,24 @@
 Summary:	DOCSIS RFI 1.1 Encoding Configuration File Settings into binary configuration files
 Summary(pl.UTF-8):	Kodowanie ustawień konfiguracyjnych w plikach binarnych wg DOCSIS RFI 1.1
 Name:		docsis
-Version:	0.9.5
-Release:	8
+Version:	0.9.6
+Release:	1
 License:	GPL v2
 Group:		Applications
-Source0:	http://dl.sourceforge.net/docsis/%{name}-%{version}.tar.gz
-# Source0-md5:	2b89cf254a5eb07b0ee8b6331238ea96
-Patch0:		%{name}-gnu-m4-detect.patch
-Patch1:		%{name}-link.patch
+Source0:	http://downloads.sourceforge.net/docsis/%{name}-%{version}.tar.bz2
+# Source0-md5:	fd431046f04b10fe8e46c4dd1c178b58
+Patch0:		%{name}-link.patch
+Patch1:		%{name}-no-common.patch
 URL:		http://docsis.sourceforge.net/
 BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	bison
+BuildRequires:	automake >= 1:1.8
+BuildRequires:	bison >= 1.28
 BuildRequires:	flex
 BuildRequires:	libtool
-BuildRequires:	net-snmp-devel
-Requires:	mibs-%{name}
+BuildRequires:	m4
+BuildRequires:	net-snmp-devel >= 5.0.7
+Requires:	mibs-%{name} = %{version}-%{release}
+Requires:	net-snmp-libs >= 5.0.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -29,12 +31,16 @@ konfiguracyjnych zgodnie z DOCSIS RFI 1.1.
 
 %package -n mibs-%{name}
 Summary:	MIBs from DOCSIS
+Summary(pl.UTF-8):	MIB-y z DOCSIS
 Group:		Base
 Requires:	mibs-dirs
 Requires:	mibs-net-snmp
 
 %description -n mibs-%{name}
-MIBs (Management Information Base) from DOCSIS.
+MIB (Management Information Base) files from DOCSIS.
+
+%description -n mibs-%{name} -l pl.UTF-8
+Pliki MIB (Management Information Base) z DOCSIS.
 
 %prep
 %setup -q
@@ -45,8 +51,8 @@ MIBs (Management Information Base) from DOCSIS.
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
-%{__automake}
 %{__autoheader}
+%{__automake}
 %configure
 %{__make}
 
@@ -68,4 +74,22 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n mibs-%{name}
 %defattr(644,root,root,755)
-%{_datadir}/mibs/*
+%{_datadir}/mibs/CLAB-DEF-MIB
+%{_datadir}/mibs/DIFFSERV-DSCP-TC
+%{_datadir}/mibs/DIFFSERV-MIB
+%{_datadir}/mibs/DOCS-BPI-MIB
+%{_datadir}/mibs/DOCS-BPI2-MIB
+%{_datadir}/mibs/DOCS-CABLE-DEVICE-MIB
+%{_datadir}/mibs/DOCS-CABLE-DEVICE-TRAP-MIB
+%{_datadir}/mibs/DOCS-IF-EXT-MIB
+%{_datadir}/mibs/DOCS-IF-MIB
+%{_datadir}/mibs/DOCS-QOS-MIB
+%{_datadir}/mibs/DOCS-SUBMGT-MIB
+%{_datadir}/mibs/IGMP-STD-MIB
+%{_datadir}/mibs/INTEGRATED-SERVICES-MIB
+%{_datadir}/mibs/PKTC-EVENT-MIB
+%{_datadir}/mibs/PKTC-IETF-SIG-MIB
+%{_datadir}/mibs/PKTC-MTA-MIB
+%{_datadir}/mibs/PKTC-SIG-MIB
+%{_datadir}/mibs/RMON2-MIB
+%{_datadir}/mibs/TOKEN-RING-RMON-MIB
